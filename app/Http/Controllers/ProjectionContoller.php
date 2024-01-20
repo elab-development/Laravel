@@ -32,6 +32,7 @@ class ProjectionContoller extends Controller
      */
     public function show(string $id)
     {
+        $projection = Projection::findOrFail($id);
         return \response()->json($projection);
     }
 
@@ -41,6 +42,7 @@ class ProjectionContoller extends Controller
     public function update(Request $request, string $id)
     {
         try {
+            $projection = Projection::findOrFail($id);
             $projection->update($request->all());
             return response()->json($projection);
         } catch (\Throwable $th) {
@@ -54,6 +56,7 @@ class ProjectionContoller extends Controller
     public function destroy(string $id)
     {
         try {
+            $projection = Projection::findOrFail($id);
             $projection->delete();
             return \response()->noContent();
          } catch (\Throwable $th) {
