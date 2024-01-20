@@ -19,7 +19,6 @@ class MovieFactory extends Factory
         return [
             "name"=>$this->faker->word,
             'duration'=>$this->faker->numberBetween(30,240),
-            'rating'=>$this->faker->randomFloat(2,1,5),
             'description'=>$this->faker->realText()
         ];
     }
