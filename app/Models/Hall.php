@@ -10,4 +10,8 @@ class Hall extends Model
     use HasFactory;
 
     protected $fillable=['name'];
+
+    public function projections(){
+        return $this->hasMany(Projection::class);
+    }
 }
