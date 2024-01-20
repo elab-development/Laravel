@@ -22,9 +22,9 @@ use Illuminate\Validation\ValidationException;
 Route::post('/login', function (Request $request) {
     $user = User::where('email', $request->email)->first();
     if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
+        return response()->json([
+            "error"=>"Credentials are not valid"
+        ],400);
     }
 
     return $user->createToken($request->email)->plainTextToken;

@@ -12,7 +12,7 @@ class ProjectionContoller extends Controller
      */
     public function index()
     {
-        //
+        return \response()->json(Projection::all());
     }
 
     /**
@@ -20,7 +20,11 @@ class ProjectionContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            return response()->json(Projection::create($request->all()));
+        } catch (\Throwable $th) {
+           return \response()->json($th->getMessage(),500);
+        }
     }
 
     /**
@@ -28,7 +32,7 @@ class ProjectionContoller extends Controller
      */
     public function show(string $id)
     {
-        //
+        return \response()->json($projection);
     }
 
     /**
@@ -36,7 +40,12 @@ class ProjectionContoller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $projection->update($request->all());
+            return response()->json($projection);
+        } catch (\Throwable $th) {
+           return \response()->json($th->getMessage(),500);
+        }
     }
 
     /**
@@ -44,6 +53,11 @@ class ProjectionContoller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $projection->delete();
+            return \response()->noContent();
+         } catch (\Throwable $th) {
+            return \response()->json($th->getMessage(),500);
+         }
     }
 }
